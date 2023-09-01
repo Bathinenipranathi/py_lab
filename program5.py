@@ -36,22 +36,23 @@ else:
 
 
 # In[ ]:
-import os.path
-import sys
-fname = input("Enter the filename : ") 
-if not os.path.isfile(fname):
- print("File", fname, "doesn't exists")
- sys.exit(0)
-infile = open(fname, "r")
-lineList = infile.readlines()
-for i in range(20):
- print(i+1, ":", lineList[i])
+import re
+# Define the regular expression for phone numbers
+phone_regex = re.compile(r'\+\d{12}')
+email_regex = re.compile(r'[A-Za-z0-9._]+@[A-Za-z0-9]+\.[A-Z|a-z]{2,}')
+# Open the file for reading
+with open('untitled1.txt', 'r') as f:
  
-word = input("Enter a word : ")
-cnt = 0
-for line in lineList:
- cnt += line.count(word)
-print("The word", word, "appears", cnt, "times in the file")
+   for line in f:
+
+        matches = phone_regex.findall(line)
+
+        for match in matches:
+            print(match)
+        matches = email_regex.findall(line)
+ 
+        for match in matches:
+            print(match)
 
 
 
